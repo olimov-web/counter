@@ -1,0 +1,56 @@
+.katta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+background: linear-gradient(orange,red);
+    width: 600px;
+    height: 600px;
+    border-radius: 15px;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+ background-color: black;
+}
+.kichik{
+    background: white;
+    width: 550px;
+    height: 550px;
+    border-radius: 15px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.btns{
+    display: flex;
+    gap: 20px;
+}
+.btn{
+width: 80px;
+height: 60px;
+border: none;
+border-radius: 15px;
+font-size: 20px;
+color: white;
+}
+.btn1{
+    background-color: rgb(67, 137, 67);
+}
+.btn2{
+    background-color: red;
+}
+.btn3{
+ background-color: black;
+}
+.son{
+    font-size: 100px;
+    font-family: sans-serif;
+    color: orange;
+}
+

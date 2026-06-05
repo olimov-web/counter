@@ -1,0 +1,225 @@
+/* ---------- App2.css ----------
+   Readable, sectioned styles with stronger animations
+   - Day / Night theme
+   - Animated counter pop / bounce
+   - Button hover/glow and hold behavior
+--------------------------------- */
+
+:root {
+  /* Colors */
+  --bg-day: #ffffff;
+  --bg-night: #071029;
+
+  --card-day-1: #ffffff;
+  --card-day-2: #f7f7fb;
+  --card-night-1: #0f1724;
+  --card-night-2: #071029;
+
+  --text-day: #0b1220;
+  --text-night: #e6eef8;
+
+  --accent-1: #ff6b6b;   /* warm red */
+  --accent-2: #ff9f4d;   /* orange */
+  --accent-green-1: #34d399;
+  --accent-green-2: #10b981;
+
+  /* Timings */
+  --fast: 120ms;
+  --med: 260ms;
+  --slow: 380ms;
+
+  /* Misc */
+  --glass-shadow: 0 12px 40px rgba(2,6,23,0.45);
+}
+
+/* ---------- Layout / Theme root ---------- */
+.root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  transition: background var(--med) ease;
+}
+
+.root.day {
+  background: var(--bg-day);
+}
+
+.root.night {
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(255,255,255,0.02), transparent), var(--bg-night);
+}
+
+/* ---------- Card / Panel ---------- */
+.panel {
+  width: min(520px, 96vw);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  transition: background var(--med) ease, color var(--med) ease, transform 320ms ease;
+}
+
+.root.day .panel {
+  background: linear-gradient(180deg, var(--card-day-1), var(--card-day-2));
+  color: var(--text-day);
+}
+
+.root.night .panel {
+  background: linear-gradient(180deg, var(--card-night-1), var(--card-night-2));
+  color: var(--text-night);
+}
+
+/* Slight lift on hover for the card */
+.panel:hover { transform: translateY(-4px); }
+
+/* ---------- Header / Theme toggle ---------- */
+.top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0.06em;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform var(--fast) ease, background var(--fast) ease;
+}
+
+.theme-toggle:hover { transform: translateY(-4px); }
+.theme-toggle:focus { outline: 3px solid rgba(255,255,255,0.06); outline-offset: 4px; }
+
+/* ---------- Counter display ---------- */
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+}
+
+.count {
+  font-size: 88px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  transition: transform var(--med) cubic-bezier(.2,.9,.4,1), color var(--fast) ease, text-shadow var(--fast) ease;
+  will-change: transform;
+}
+
+/* Stronger pop + bounce when number changes */
+@keyframes strongPop {
+  0%   { transform: scale(.72) rotate(-6deg);  opacity: 0 }
+  50%  { transform: scale(1.18) rotate(4deg);   opacity: 1 }
+  85%  { transform: scale(.98) rotate(-2deg);  opacity: 1 }
+  100% { transform: scale(1) rotate(0deg);     opacity: 1 }
+}
+
+.count { animation: strongPop var(--med) cubic-bezier(.2,.9,.4,1); }
+
+/* Color flash on change for a split second */
+.root.day .count { color: #ff6b6b; }
+.root.night .count { color: #ff9f4d; }
+
+/* ---------- Controls / Buttons ---------- */
+.controls {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.control {
+  min-width: 86px;
+  height: 56px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 10px 28px rgba(2,6,23,0.32);
+  transition: transform var(--fast) ease, box-shadow var(--fast) ease, background var(--fast) ease, filter var(--fast) ease;
+}
+
+.control:active { transform: translateY(2px) scale(0.995); }
+.control:focus { outline: 3px solid rgba(255,255,255,0.06); outline-offset: 4px; }
+
+.plus {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: white;
+}
+
+.minus {
+  background: linear-gradient(90deg, var(--accent-green-1), var(--accent-green-2));
+  color: white;
+}
+
+.reset {
+  background: rgba(255,255,255,0.06);
+  color: inherit;
+}
+
+/* Hover glow & subtle lift */
+.plus:hover, .minus:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.32), 0 0 18px rgba(255,120,60,0.08);
+  filter: saturate(1.06);
+}
+
+.reset:hover {
+  transform: translateY(-4px);
+}
+
+.icon { font-size: 28px; line-height: 1 }
+
+.hint { margin: 0; font-size: 13px; text-align: center; opacity: 0.85 }
+
+/* Theme-specific tweaks for reset button */
+.root.day .reset { background: rgba(0,0,0,0.05); }
+.root.night .reset { background: rgba(255,255,255,0.04); }
+
+/* Accessibility helper */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0 }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .count { font-size: 56px }
+  .control { min-width: 58px; height: 44px }
+}
+
+/* Theme-aware adjustments */
+.root.day .reset{ background: rgba(0,0,0,0.05); }
+.root.night .reset{ background: rgba(255,255,255,0.06); }
+
+/* pop animation when number changes */
+@keyframes numberPop{
+  0%{ transform: scale(.86); opacity:0 }
+  60%{ transform: scale(1.08); opacity:1 }
+  100%{ transform: scale(1); opacity:1 }
+}
+.count{ animation: numberPop 260ms ease; }
+
+/* responsive */
+@media (max-width:480px){
+  .count{ font-size:56px }
+  .control{ min-width:58px; height:44px }
+}
+
+/* accessibility helper */
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0 }
