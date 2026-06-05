@@ -24,7 +24,6 @@ function App() {
              <button className="btn btn1" onClick={() => funcPuls()}>+</button>
                <button className="btn btn3" onClick={() => funcreset()}>reset</button>
       <button className="btn btn2" onClick={() => funcMinus()}>-</button>
-    
       </div>
       </div>
     </div>
